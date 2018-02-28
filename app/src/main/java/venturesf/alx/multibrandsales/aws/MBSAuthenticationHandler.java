@@ -2,7 +2,10 @@ package venturesf.alx.multibrandsales.aws;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.Chal
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.MultiFactorAuthenticationContinuation;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.AuthenticationHandler;
 
+import venturesf.alx.multibrandsales.ClientsList;
 import venturesf.alx.multibrandsales.R;
 
 import venturesf.alx.multibrandsales.util.LoginUtils;
@@ -39,10 +43,12 @@ public class MBSAuthenticationHandler implements AuthenticationHandler {
         LoginUtils. showProgress(this.activity,false);
        ((TextView)this.activity.findViewById(R.id.email )).setError(null);
 
-            CharSequence text = "User not found, please tray again or register";
-
             Toast toast = Toast.makeText(context, "Log In Success", Toast.LENGTH_LONG);
             toast.show();
+
+            Intent intent = new Intent(this.activity, ClientsList.class);
+            //intent.
+        activity.startActivity(intent);
     }
 
     @Override
@@ -82,8 +88,7 @@ public class MBSAuthenticationHandler implements AuthenticationHandler {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }else if(ex.getErrorCode().equals( "UserNotConfirmedException")){
-            Toast toast = Toast.makeText(context, "Please Confirm your user", Toast.LENGTH_LONG);
-            toast.show();
+           LoginUtils.confirmFlow(this.activity);
         }
 
         Log.i( "Login fail",ex.getMessage() );

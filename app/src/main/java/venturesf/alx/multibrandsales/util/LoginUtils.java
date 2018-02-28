@@ -5,7 +5,11 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import venturesf.alx.multibrandsales.R;
 
@@ -50,5 +54,31 @@ public class LoginUtils {
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
+    }
+
+    public static void confirmUser(Activity activity){
+        Log.i("Confirm","Confirming user...");
+        TextView confirmCode = activity.findViewById(R.id.confirmation_code);
+        String confirmCodeTxt = confirmCode.getText().toString() ;
+
+        Log.i("Confirm Code",confirmCodeTxt);
+
+    }
+
+    public static void confirmFlow(final Activity activity){
+
+        Toast toast = Toast.makeText(activity.getApplicationContext(), "Please Confirm your user", Toast.LENGTH_LONG);
+        toast.show();
+        activity.findViewById(R.id.conf_code ).setVisibility(View.VISIBLE);
+        activity.findViewById(R.id.password ).setEnabled(false);
+        Button mButton = (Button)activity.findViewById(R.id.email_sign_in_button);
+        mButton.setText(R.string.action_confirm );
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginUtils.confirmUser(activity);
+            }
+        });
+
     }
 }

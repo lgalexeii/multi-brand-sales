@@ -2,6 +2,7 @@ package venturesf.alx.multibrandsales.aws;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserCodeDeliveryDetails;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.SignUpHandler;
 
+import venturesf.alx.multibrandsales.ClientsList;
 import venturesf.alx.multibrandsales.R;
 import venturesf.alx.multibrandsales.util.LoginUtils;
 
@@ -32,10 +34,14 @@ public class MBSSignUpHandler implements SignUpHandler {
         LoginUtils. showProgress(this.activity,false);
         Context context = activity.getApplicationContext();
         if(!userConfirmed) {
-            Toast.makeText(context, "Please confirm the user", Toast.LENGTH_SHORT).show();
+            LoginUtils.confirmFlow(activity);
         }
         else {
+
             Toast.makeText(context, "User successfully registered", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this.activity, ClientsList.class);
+            //intent.
+            activity.startActivity(intent);
         }
     }
 
