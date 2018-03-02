@@ -18,6 +18,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.Chal
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.MultiFactorAuthenticationContinuation;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.AuthenticationHandler;
 
+import venturesf.alx.multibrandsales.ClientListActivity;
 import venturesf.alx.multibrandsales.ClientsList;
 import venturesf.alx.multibrandsales.R;
 
@@ -46,7 +47,7 @@ public class MBSAuthenticationHandler implements AuthenticationHandler {
             Toast toast = Toast.makeText(context, "Log In Success", Toast.LENGTH_LONG);
             toast.show();
 
-            Intent intent = new Intent(this.activity, ClientsList.class);
+            Intent intent = new Intent(this.activity, ClientListActivity.class);
             //intent.
         activity.startActivity(intent);
     }
@@ -89,6 +90,9 @@ public class MBSAuthenticationHandler implements AuthenticationHandler {
             toast.show();
         }else if(ex.getErrorCode().equals( "UserNotConfirmedException")){
            LoginUtils.confirmFlow(this.activity);
+        }else if(ex.getErrorCode().equals("NotAuthorizedException")){
+            ((TextView)this.activity.findViewById(R.id.password )).setError(ex.getErrorMessage());
+            Toast.makeText(context, "Incorrect Password", Toast.LENGTH_SHORT) ;
         }
 
         Log.i( "Login fail",ex.getMessage() );
