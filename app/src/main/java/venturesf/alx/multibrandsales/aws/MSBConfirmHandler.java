@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GenericHandler;
 
-import venturesf.alx.multibrandsales.ClientsList;
+import venturesf.alx.multibrandsales.ClientListActivity;
 import venturesf.alx.multibrandsales.R;
 import venturesf.alx.multibrandsales.util.LoginUtils;
 
@@ -34,7 +34,7 @@ public class MSBConfirmHandler implements GenericHandler {
         Toast toast = Toast.makeText(context, "User has been confirmed", Toast.LENGTH_LONG);
         toast.show();
 
-        Intent intent = new Intent(this.activity, ClientsList.class);
+        Intent intent = new Intent(this.activity, ClientListActivity.class);
         //intent.
         activity.startActivity(intent);
 

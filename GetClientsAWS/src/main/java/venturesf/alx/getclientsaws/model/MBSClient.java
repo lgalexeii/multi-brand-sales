@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by B942272 on 01/03/2018.
  */
 
-public class MBSClient {
+public class MBSClient{
     private int clientId;
     private String name;
     private String lastName;
@@ -103,5 +103,14 @@ public class MBSClient {
     @Override
     public int hashCode() {
         return clientId;
+    }
+
+    @Override
+    public String toString() {
+        return "MBSClient{" +
+                "clientId=" + clientId +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }

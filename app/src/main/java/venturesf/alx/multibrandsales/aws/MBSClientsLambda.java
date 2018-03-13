@@ -1,8 +1,8 @@
 package venturesf.alx.multibrandsales.aws;
 import com.amazonaws.mobileconnectors.lambdainvoker.LambdaFunction;
 
-import venturesf.alx.getclientsaws.vo.ClientsRequest;
-import venturesf.alx.getclientsaws.vo.ClientsResponse;
+import venturesf.alx.vo.ClientsRequest;
+import venturesf.alx.vo.ClientsResponse;
 
 /**
  * Created by B942272 on 01/03/2018.
@@ -11,4 +11,7 @@ import venturesf.alx.getclientsaws.vo.ClientsResponse;
 public interface MBSClientsLambda {
     @LambdaFunction
     ClientsResponse mbsClients(ClientsRequest request);
+
+    @LambdaFunction
+    ClientsResponse mbsClientImage(ClientsRequest request);
 }

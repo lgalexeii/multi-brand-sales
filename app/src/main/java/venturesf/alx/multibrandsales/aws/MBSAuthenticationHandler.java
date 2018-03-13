@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +17,6 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.Mult
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.AuthenticationHandler;
 
 import venturesf.alx.multibrandsales.ClientListActivity;
-import venturesf.alx.multibrandsales.ClientsList;
 import venturesf.alx.multibrandsales.R;
 
 import venturesf.alx.multibrandsales.util.LoginUtils;

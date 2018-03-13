@@ -3,28 +3,36 @@ package venturesf.alx.multibrandsales.aws;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.lambdainvoker.LambdaFunctionException;
+import com.amazonaws.mobileconnectors.lambdainvoker.LambdaInvokerFactory;
+import com.amazonaws.regions.Regions;
 
-import venturesf.alx.getclientsaws.model.MBSClient;
-import venturesf.alx.getclientsaws.vo.ClientsRequest;
-import venturesf.alx.getclientsaws.vo.ClientsResponse;
+import venturesf.alx.vo.ClientsRequest;
+import venturesf.alx.vo.ClientsResponse;
 
 /**
  * Created by B942272 on 01/03/2018.
  */
 
-public class MBSAsyncClientLambda extends AsyncTask<ClientsRequest, Void, ClientsResponse> {
-    private MBSClientsLambda mbsClientsLambda;
-    private Activity activity;
-    private ArrayAdapter adapter;
+public abstract class MBSAsyncClientLambda extends AsyncTask<ClientsRequest, Void, ClientsResponse> {
+    protected MBSClientsLambda mbsClientsLambda;
 
-    public MBSAsyncClientLambda(MBSClientsLambda mbsClientsLambda, Activity activity, ArrayAdapter adapter) {
-        this.mbsClientsLambda = mbsClientsLambda;
-        this.activity = activity;
-        this.adapter = adapter;
+    public MBSAsyncClientLambda(Activity activity) {
+
+        // Create an instance of CognitoCachingCredentialsProvider
+        CognitoCachingCredentialsProvider cognitoProvider = new CognitoCachingCredentialsProvider(
+               activity. getApplicationContext(), "us-east-1:f14dec35-2fe4-49b7-aae7-a01f99e14097", Regions.US_EAST_1);
+
+        // Create LambdaInvokerFactory, to be used to instantiate the Lambda proxy.
+        LambdaInvokerFactory factory = new LambdaInvokerFactory(activity.getApplicationContext(),
+                Regions.US_EAST_1, cognitoProvider);
+
+        // Create the Lambda proxy object with a default Json data binder.
+        // You can provide your own data binder by implementing
+        // LambdaDataBinder.
+        this.mbsClientsLambda = factory.build(MBSClientsLambda.class);
     }
 
     @Override
@@ -37,15 +45,5 @@ public class MBSAsyncClientLambda extends AsyncTask<ClientsRequest, Void, Client
             Log.e("Tag", "Failed to invoke echo", lfe);
             return null;
         }
-    }
-
-    @Override
-    protected void onPostExecute(ClientsResponse result) {
-        if (result == null) {
-            return;
-        }
-        for(MBSClient client : result.getClients() )
-            this.adapter.add(client.getClientId() + " - " + client.getName() + " " +client.getLastName() +
-            " " + client.getSecondLastName() + " - " + client.getStatus());
     }
 }

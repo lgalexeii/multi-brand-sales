@@ -26,10 +26,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ClientsList"
-            android:label="@string/title_activity_clients_list"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ClientListActivity"
             android:label="@string/title_client_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>

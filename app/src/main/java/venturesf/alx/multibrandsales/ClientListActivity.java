@@ -10,13 +10,18 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import venturesf.alx.multibrandsales.dummy.DummyContent;
+import venturesf.alx.model.MBSClient;
+import venturesf.alx.vo.ClientsRequest;
+import venturesf.alx.multibrandsales.aws.MBSAsyncClientLambdaLs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,25 +69,32 @@ public class ClientListActivity extends AppCompatActivity {
         View recyclerView = findViewById(R.id.client_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
+
+        ClientsRequest request = new ClientsRequest();
+
+        (new MBSAsyncClientLambdaLs(this, (SimpleItemRecyclerViewAdapter)((RecyclerView) recyclerView).getAdapter()) ).execute(request);
+
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, new ArrayList<MBSClient>(), mTwoPane));
     }
+
+
 
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final ClientListActivity mParentActivity;
-        private final List<DummyContent.DummyItem> mValues;
+        private List<MBSClient> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
+                MBSClient item = (MBSClient) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(ClientDetailFragment.ARG_ITEM_ID, item.id);
+                    arguments.putString (ClientDetailFragment.ARG_ITEM_ID,  String.valueOf(item.getClientId()));
                     ClientDetailFragment fragment = new ClientDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -91,7 +103,7 @@ public class ClientListActivity extends AppCompatActivity {
                 } else {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, ClientDetailActivity.class);
-                    intent.putExtra(ClientDetailFragment.ARG_ITEM_ID, item.id);
+                    intent.putExtra(ClientDetailFragment.ARG_ITEM_ID, String.valueOf(item.getClientId()));
 
                     context.startActivity(intent);
                 }
@@ -99,7 +111,7 @@ public class ClientListActivity extends AppCompatActivity {
         };
 
         SimpleItemRecyclerViewAdapter(ClientListActivity parent,
-                                      List<DummyContent.DummyItem> items,
+                                      List<MBSClient> items,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
@@ -115,8 +127,8 @@ public class ClientListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mIdView.setText(mValues.get(position).getName() + " " + mValues.get(position).getLastName() );
+            holder.mContentView.setText(mValues.get(position).getPhoneNumber() );
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
@@ -125,6 +137,11 @@ public class ClientListActivity extends AppCompatActivity {
         @Override
         public int getItemCount() {
             return mValues.size();
+        }
+
+        public void setmValues(List<MBSClient> values){
+            this.mValues = values;
+            super.notifyDataSetChanged();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
