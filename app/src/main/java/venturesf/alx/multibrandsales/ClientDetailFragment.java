@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import venturesf.alx.multibrandsales.aws.MBSAsyncClientImageLambda;
 import venturesf.alx.vo.ClientsRequest;
 import venturesf.alx.multibrandsales.aws.MBSAsyncClientLambdaSr;
 
@@ -70,6 +71,8 @@ public class ClientDetailFragment extends Fragment {
         ClientsRequest request = new ClientsRequest();
         request.setClientId(mItem);
         (new MBSAsyncClientLambdaSr(this.getActivity() )).execute(request);
+
+        (new MBSAsyncClientImageLambda(this.getActivity() )).execute(request);
 
 
     }
