@@ -95,6 +95,7 @@ public class ClientListActivity extends AppCompatActivity {
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putString (ClientDetailFragment.ARG_ITEM_ID,  String.valueOf(item.getClientId()));
+                    arguments.putBoolean(ClientDetailFragment.ARG_TWO_PANE ,mTwoPane);
                     ClientDetailFragment fragment = new ClientDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -104,6 +105,7 @@ public class ClientListActivity extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, ClientDetailActivity.class);
                     intent.putExtra(ClientDetailFragment.ARG_ITEM_ID, String.valueOf(item.getClientId()));
+                    intent.putExtra(ClientDetailFragment.ARG_TWO_PANE, mTwoPane);
 
                     context.startActivity(intent);
                 }

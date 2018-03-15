@@ -38,11 +38,11 @@ public class MBSAsyncClientImageLambda extends MBSAsyncClientLambda {
 
         ImageView image = (ImageView) activity.findViewById(R.id.client_image);
         // Usando Glide para la carga asíncrona
-
-        Glide.with(activity)
-                .load( Base64.decode(clientsResponse.getClients().get(0).getPhotoB64(),Base64.DEFAULT )   )
-                .centerCrop()
-                .into(image);
-
+        if(image != null){
+            Glide.with(activity)
+                    .load( Base64.decode(clientsResponse.getClients().get(0).getPhotoB64(),Base64.DEFAULT )   )
+                    .centerCrop()
+                    .into(image);
+        }
     }
 }

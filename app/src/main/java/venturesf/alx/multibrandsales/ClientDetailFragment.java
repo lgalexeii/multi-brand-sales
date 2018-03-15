@@ -32,6 +32,7 @@ public class ClientDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_ITEM_ID = "client";
+    public static final String ARG_TWO_PANE = "mTwoPane";
 
 
     /**
@@ -104,10 +105,12 @@ public class ClientDetailFragment extends Fragment {
     private void loadImageParallax(int id) {
         ImageView image = (ImageView) getActivity().findViewById(R.id.client_image);
         // Usando Glide para la carga asíncrona
-        Glide.with(this)
-                .load(id)
-                .centerCrop()
-                .into(image);
+        if(image != null){
+            Glide.with(this)
+                    .load(id)
+                    .centerCrop()
+                    .into(image);
+        }
     }
 
     @Override
