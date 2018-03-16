@@ -10,15 +10,15 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/action_add"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_touch_app_white_18dp"
         android:orderInCategory="1"
-        android:title="Pays"
+        android:title="@string/action_sales"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_favorite"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_payment_white_18dp"
         android:orderInCategory="2"
-        android:title="Sell"
+        android:title="@string/action_payments"
         app:showAsAction="ifRoom" />
 
 </menu>

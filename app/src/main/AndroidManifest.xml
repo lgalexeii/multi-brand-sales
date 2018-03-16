@@ -28,7 +28,7 @@
         <activity
             android:name=".ClientListActivity"
             android:label="@string/title_client_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ClientDetailActivity"
             android:label="@string/title_client_detail"
@@ -38,6 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="venturesf.alx.multibrandsales.ClientListActivity" />
         </activity>
+        <activity android:name=".AddClientActivity"></activity>
     </application>
 
 </manifest>

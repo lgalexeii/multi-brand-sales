@@ -6,4 +6,7 @@
     <dimen name="app_bar_height">200dp</dimen>
     <dimen name="item_width">300dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <!--Elevation -->
+    <dimen name="elev_app_bar">4dp</dimen>
+    <dimen name="elev_fab">6dp</dimen>
 </resources>

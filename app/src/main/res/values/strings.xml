@@ -17,7 +17,17 @@
         completions."
     </string>
     <string name="title_activity_clients_list">ClientsList</string>
-    <string name="action_settings">Settings</string>
     <string name="title_client_list">Clients</string>
     <string name="title_client_detail">Client Detail</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_sales">Sales</string>
+    <string name="action_payments">Payments</string>
+    <string name="action_ws_app">WhatsApp</string>
+    <!--Add Client Form-->
+    <string name="cd_name">Name</string>
+    <string name="cd_last_name">Last Name</string>
+    <string name="cd_second_last_name">Second Last Name</string>
+    <string name="cd_email">Second Last Name</string>
+    <string name="cd_phone_number">Second Last Name</string>
+    <string name="action_save">Save</string>
 </resources>
